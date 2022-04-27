@@ -1,0 +1,15 @@
+//3. Используя циклы, заполнить массив размером 10 чётными числами, которые лежат в промежутке от 1 до 20.
+public class Main {
+    public static void main(String[] args) {
+        int[] array =new int[10];
+        int count= 0;
+        for(int i =0 ; i < array.length;i++){
+                count=(i+1)*2;
+                array[i] = count;
+        }
+
+        for(int i=0;i<array.length;i++){
+            System.out.println(" array's element "+i+ " = "+array[i]);
+        }
+    }
+}

@@ -1,0 +1,97 @@
+
+public class Main {
+    public static void main(String[] args) {
+        int[] array =new int[]{12, 83, 17, 31, 2, 7, 93, 76, 61, 22, 45, 98, 53, 16, 13};
+        //int[] array =new int[]{1,2, 6, 4, 3, 5, 7, 9, 8, 10};// массив для проверки условия на равные четные и не четные
+        //int[] array =new int[]{2, 6, 4, 3, 5, 7, 9, 8, 10};// массив для проверки где чет больше 
+        int count=0;//четные
+        int uncount = 0;//нечетные
+        int tmp =0;//темповая переменная для перезаписи элемента массива
+
+        /**
+         * подсчет четных и не четных
+         */
+
+        for(int i=0 ;i< array.length;i++){
+            if(array[i]%2==0){
+                count++;
+            }
+            else{
+                uncount++;
+            }
+        }
+        System.out.println(" четные "+count + " не четн  "+ uncount   );
+
+        /**
+         *   если число чет и не чет рано
+         */
+
+        if(count==uncount){
+            for(int i=1 ;i< array.length;i++){
+                if(array[i-1]%2==0 && array[i]%2==0){
+                    for(int j = i ;j<array.length;j++){
+                        if(array[j]%2!=0){
+                            tmp= array[i];
+                            array[i]=array[j];
+                            array[j]=tmp;
+                            break;
+                        }
+                    }
+                }
+                if(array[i-1]%2!=0 && array[i]%2!=0){
+                    for(int j = i ;j<array.length;j++){
+                        if(array[j]%2==0){
+                            tmp= array[i];
+                            array[i]=array[j];
+                            array[j]=tmp;
+                            break;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        /**
+         * если больше четных
+         */
+
+        if(count>uncount){
+            for(int j=0;j<count;j++){
+                for (int i = 1; i < array.length; i++) {
+                    if (array[i - 1] % 2 == 0) {
+                        for (int k = 0; k < array.length; k++) {
+                            tmp = array[i - 1];
+                            array[i - 1] = array[i];
+                            array[i] = tmp;
+                        }
+                    }
+                }
+            }
+        }
+
+        /**
+         *если больше нечетных
+         */
+
+        if(count<uncount) {
+            for(int j=0;j<uncount;j++){
+                for (int i = 1; i < array.length; i++) {
+                    if (array[i - 1] % 2 != 0) {
+                        for (int k = 0; k < array.length; k++) {
+                            tmp = array[i - 1];
+                            array[i - 1] = array[i];
+                            array[i] = tmp;
+                        }
+                    }
+                }
+            }
+        }
+        /**
+         * вывод массива
+         */
+        for(int i=0;i<array.length;i++){
+            System.out.println("massive element "+i+ " = "+array[i]);
+        }
+    }
+}
