@@ -1,0 +1,18 @@
+//5. Используя циклы, заполнить массив размером 20 числами, которые лежат в промежутке от 1 до 20. Нечётные числа заменить на число 1.
+public class Main {
+    public static void main(String[] args) {
+        int[] array =new int[20];
+        int count= 0;
+        for(int i =0 ; i < array.length;i++) {
+            count=i;
+            array[i] = count;
+            if (array[i] % 2 != 0){
+                array[i] = 1;
+            }
+        }
+
+        for(int i=0;i<array.length;i++){
+            System.out.println(" array's element "+i+ " = "+array[i]);
+        }
+    }
+}

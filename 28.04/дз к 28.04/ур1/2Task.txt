@@ -1,0 +1,15 @@
+//2. Используя циклы, заполнить массив размером 10 числами от 10 до 1. Распечатать массив.
+public class Main {
+    public static void main(String[] args) {
+        int[] array =new int[10];
+        int count= 10;
+        for(int i =0 ; i < array.length;i++){
+            array[i]=count;
+            count--;
+        }
+
+        for(int i=0;i<array.length;i++){
+            System.out.println(" array's element "+i+ " = "+array[i]);
+        }
+    }
+}
