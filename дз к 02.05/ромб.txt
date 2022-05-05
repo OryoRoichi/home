@@ -1,0 +1,52 @@
+// нарисовать ромб используя символ *
+
+public class Main {
+    public static void main(String[] args) {
+        char[][] array =new char[7][7];
+        char star = '*';
+        char space = ' ';
+        int middle=array.length/2;
+        int start=0;
+
+        System.out.println(middle);
+        for (int i =0 ; i<array.length;i++){
+            for(int j=0; j<array.length; j++){
+                array[i][j]=space;
+
+            }
+        }
+        //ромб
+
+            for (int i = 0; i < array.length; i++) {
+                for (int j = 0; j < array.length; j++) {
+                    start = middle - i;
+                    if (middle - i >= 0) {
+                        for (int k = start; k <= middle + i; k++) {
+                            array[i][k] = star;
+                            array[array.length - 1 - i][k] = star;
+                        }
+                    }
+                }
+            }
+// песочные часы
+//        for (int i =0 ; i<array.length;i++){
+//            for(int j=0; j<array.length; j++){
+//                  start= i;
+//                  if (start<=middle) {
+//                      for (int k = start; k < array.length - start; k++) {
+//                          array[i][k] = star;
+//                          array[array.length - 1 - i][k] = star;
+//                      }
+//                  }
+//
+//            }
+//        }
+
+        for(int i=0;i<array.length;i++){
+            for(int j=0; j<array.length; j++) {
+                System.out.print(array[i][j]);
+            }
+            System.out.println();
+        }
+    }
+}
