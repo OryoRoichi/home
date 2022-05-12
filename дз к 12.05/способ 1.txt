@@ -1,0 +1,164 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
+
+public class Main {
+
+    /**
+     * нам нужно сделать рандомное яблоко +
+     * и ограничить поле
+     * способ 1 не давать возможности выйти за поле +
+     * если ролл больше чем  текущая позиция - длинна тогда новая позиция будет максимальное допустимое значение строки столбца
+     * способ 2 игрок переходит на соответствующее значение но с другой стороны поля
+     * рост змейки при поедании?
+     */
+
+    // Условимся, что currentPosition[0] - это координата змейки по вертикали,
+    // а currentPosition[1] - это координата змейки по горизонтали
+    static int[] currentPosition = new int[]{5,5};
+    static int[] applePosition= new int[]{0,0};
+    static String[][] field;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        field = buildField(10, 10);
+
+        printField(field);
+
+        String direction;
+
+        System.out.println("Press 'start'");
+
+
+        while (!(direction = reader.readLine()).equalsIgnoreCase("exit")) {
+
+            int cubeValue = 1;
+                    //rollCube();
+            System.out.println("Enter Direction");
+
+            direction = reader.readLine();
+
+            move(cubeValue, direction);
+
+            if(applePosition[0]==currentPosition[0]&& applePosition[1]==currentPosition[1]){
+                field = buildField(10,10);
+            }
+
+            printField(field);
+            System.out.println("Enter 'roll' to continue or 'exit' to stop");
+
+        }
+
+    }
+
+    static void move(int cubeValue, String direction) {
+        if (direction.equalsIgnoreCase("right")) {
+            int oldVertical = currentPosition[0];
+            int oldHorizontal = currentPosition[1];
+            field[oldVertical][oldHorizontal] = " . ";
+            currentPosition[1] = currentPosition[1] + cubeValue;
+
+            if(currentPosition[1]>=0 && currentPosition[1]<field.length){
+                field[currentPosition[0]][currentPosition[1]] = " o ";
+            }
+            else {
+                currentPosition[1]= field.length-1;
+                field[currentPosition[0]][currentPosition[1]] = " o ";
+            }
+
+        }
+        if (direction.equalsIgnoreCase("down")) {
+            int oldVertical = currentPosition[0];
+            int oldHorizontal = currentPosition[1];
+            field[oldVertical][oldHorizontal] = " . ";
+            currentPosition[0] = currentPosition[0] + cubeValue;
+
+            if(currentPosition[0]>=0 && currentPosition[0]<field.length){
+                field[currentPosition[0]][currentPosition[1]] = " o ";
+            }
+            else {
+                currentPosition[0]= field.length-1;
+                field[currentPosition[0]][currentPosition[1]] = " o ";
+
+            }
+
+        }
+        if (direction.equalsIgnoreCase("left")) {
+            int oldVertical = currentPosition[0];
+            int oldHorizontal = currentPosition[1];
+            field[oldVertical][oldHorizontal] = " . ";
+            currentPosition[1] = currentPosition[1] - cubeValue;
+
+            if(currentPosition[1]>=0 && currentPosition[1]<field.length){
+                field[currentPosition[0]][currentPosition[1]] = " o ";
+            }
+            else {
+                currentPosition[1]= 0;
+                field[currentPosition[0]][currentPosition[1]] = " o ";
+
+            }
+
+        }
+        if (direction.equalsIgnoreCase("up")) {
+            int oldVertical = currentPosition[0];
+            int oldHorizontal = currentPosition[1];
+            field[oldVertical][oldHorizontal] = " . ";
+            currentPosition[0] = currentPosition[0] - cubeValue;
+
+            if(currentPosition[0]>=0 && currentPosition[0]<field.length){
+                field[currentPosition[0]][currentPosition[1]] = " o ";
+            }
+            else {
+                currentPosition[0]= 0;
+                field[currentPosition[0]][currentPosition[1]] = " o ";
+
+            }
+
+        }
+
+    }
+
+    static int rollCube() { // рандомное число для шага
+        Random random = new Random();
+        int cubeValue = random.nextInt(6);
+        System.out.println(cubeValue);
+        return cubeValue;
+    }
+    static int setAppleVertical() { // яблочный координатор
+        Random random = new Random();
+        applePosition[0] = random.nextInt(10);
+        return applePosition[0];
+    }
+    static int setAppleHorizontal() { // яблочный координатор
+        Random random = new Random();
+        applePosition[1] = random.nextInt(10);
+        return applePosition[1];
+    }
+
+    static String[][] buildField(int width, int height) {//строим поле
+        String[][] field = new String[height][width];
+
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field[i].length; j++) {
+                field[i][j] = " . ";
+            }
+        }
+        field[currentPosition[0]][currentPosition[1]] = " o ";
+        field[applePosition[0]=setAppleVertical()][applePosition[1]=setAppleHorizontal()] = " * ";
+        return field;
+    }
+
+    static void printField(String[][] field) { // вывод поля
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field[i].length; j++) {
+                System.out.print(field[i][j]);
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+
