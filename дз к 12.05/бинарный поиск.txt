@@ -1,44 +1,43 @@
 import java.util.Arrays;
-import java.util.Collection;
 
 public class Main {
     public static void main(String[] args) {
         int[] array= new int[]{1,3,6,9,11,14,17,22};
         int k=17;
         int index= 0;
-        index = Arrays.binarySearch(array,k);
-        //index =search(k,array,0,array.length-1);
-       //index=find(k,array,0,array.length-1);
+        //index = Arrays.binarySearch(array,k);//метод Класса Arrays метод выполяется через логический сдвиг вправо
+        //index =search(k,array,0,array.length-1);//метод череp IF
+        index=find(k,array,0,array.length-1);//рекурсионный метод
 
-        System.out.println("Chislo = "+k+" ego index ="+index);
+        System.out.println("NUmber = "+k+" Index ="+index);
 
     }
 
     /**
-     * четное не четное число  элементов массива
-     * если неч длиннамассива+1/2-1
-     * если чет делимна 2 -1
-     * @return
+     *
+     * @param min индекс первого элемента массива
+     * @param max индекс последнего элемента массива
+     * @return выводит индекс среднего элемента массива
      */
     public static int findMiddle(int min,int max){
         int middle= min+((max-min)/2);
-//        if(array.length % 2 == 0){
-//            middle= array.length+1/2+1;
-//        }else{
-//            middle= array.length/2+1;
-//        }
         return middle;
     }
+
+    /**
+     * @param numb искомое число
+     * @param array заранее сортированный массив
+     * @param min индекс первого элемента массива
+     * @param max индекс первого элемента массива
+     * @return выводит индекс искомого числа
+     */
     static int search(int numb, int[] array,int min,int max ){
         int index=0;
-        int i=0;
-        boolean a= true;
+
         while(min<=max) {
 
-           /// System.out.println( i);
             int middle =findMiddle(min, max) ;
 
-            System.out.println( middle );
             if (array[middle] > numb) {
                 max= middle-1;
             } else if (array[middle] < numb) {
@@ -47,19 +46,25 @@ public class Main {
                 index = middle;
                 break;
             }
-            i++;
         }
         return index;
     }
+
+    /**
+     * вызызов функции внутри тела функции (рекурсия)
+     * @param numb искомое число
+     * @param array заранее сортированный массив
+     * @param min индекс первого элемента массива
+     * @param max индекс первого элемента массива
+     * @return выводит индекс искомого числа
+     */
     static int find(int numb, int[] array,int min,int max ){
         int index=0;
 
         while(min<=max) {
 
-            /// System.out.println( i);
             int middle =findMiddle(min, max) ;
 
-            System.out.println( middle );
             if (array[middle] > numb) {
                 index=find(numb,array,min,middle-1);
                 max= middle-1;
