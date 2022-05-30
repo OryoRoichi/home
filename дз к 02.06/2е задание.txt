@@ -1,0 +1,104 @@
+
+public class Main {
+    /**
+     * a  b  c  d  e  f  g  h  i  j  k  l  m
+     *  1  2  3  4  5  6  7  8  9 10 11 12 13
+     *  n  o  p  q  r  s  t  u  v  w  x  y  z
+     * 14 15 16 17 18 19 20 21 22 23 24 25 26
+     */
+    static String[] alph =new String[]{ "a", "b", "c", "d", "e",
+                                        "f", "g", "h", "i", "j",
+                                        "k", "l", "m", "n", "o",
+                                        "p", "q", "r", "s", "t",
+                                        "u", "v", "w", "x", "y", "z"};
+
+    public static void main(String[] args) {
+
+        String messege ="scout";
+        int key = 1939;
+        System.out.println(crr(messege,key));
+        System.out.println(helper(messege,key));
+    }
+
+    static String crr(String str,int key){
+        String[] array = str.split( "");
+        String[] keyArr = String.valueOf(key).split("");
+        String  newStr="";
+        int strCount= 0;
+        int keyCount=0;
+
+        for(int i = 0;i<array.length;i++){
+            for(int j = 0; j < alph.length; j++){
+                if (array[i].matches(alph[j])){
+                    array[i]=String.valueOf(j+1);
+                }
+            }
+        }
+        while(strCount < array.length){
+            if(strCount>=keyArr.length){
+                keyCount= 0;
+            }
+            array[strCount]=String.valueOf(Integer.valueOf(array[strCount]) +Integer.valueOf(keyArr[keyCount]));
+            strCount++;
+            keyCount++;
+        }
+
+        for(int i =0; i < array.length;i++){
+            if (i == array.length-1){
+                newStr= newStr.concat(array[i]+".");
+            }else {
+                newStr= newStr.concat(array[i] + ", ");
+            }
+        }
+        return newStr;
+    }
+    static String helper(String str, int key){
+        String[] array = str.split( "");
+        String[] keyArr = String.valueOf(key).split("");
+        String  newStr="";
+        int x=0,y=0;
+        for(int i = 0;i<array.length;i++){
+            for(int j = 0; j < alph.length; j++){
+                if (array[i].matches(alph[j])){
+                    array[i]=String.valueOf(j+1);
+                }
+            }
+        }
+
+        newStr=recurs(array,keyArr,0,0,newStr,Integer.valueOf(array[0]),Integer.valueOf(keyArr[0]));
+
+        return newStr;
+    }
+
+    static String recurs(String[] array,String[] keyArr, int key,int count, String str,int x ,int y ){
+
+        if(count<array.length){
+
+
+            if(key == keyArr.length-1){
+                key= 0;
+            }
+
+            array[count]=String.valueOf(x  + y);
+
+            if (count == array.length-1){
+                str= str.concat(array[count]+".");
+            }else {
+                str= str.concat(array[count]+ ", ");
+            }
+           key++;
+           //count++;
+           str = recurs(array,keyArr,count,key,str,
+                    Integer.valueOf(array[count]),
+                    Integer.valueOf(keyArr[key]));
+
+        }
+        return str;
+
+    }
+}
+
+
+
+
+
